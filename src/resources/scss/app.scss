@@ -1,0 +1,11 @@
+@import 'variables';
+
+h1 {
+    color: $red-color;
+    background-color: white;
+    padding : 12px;
+}
+
+.container {
+    font-size: 100px;
+}
