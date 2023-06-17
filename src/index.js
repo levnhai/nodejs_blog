@@ -18,13 +18,13 @@ app.use(
 app.use(express.json());
 
 // template engine
-app.set('view engine', 'hbs');
-app.engine(
-    'hbs',
-    hbs.engine({
-        extname: '.hbs',
-    }),
-);
+  app.set('view engine', 'hbs');
+  app.engine(
+        'hbs',
+        hbs.engine({
+          extname: '.hbs',
+      }),
+  );
 
 //Static Folder
 app.set('views', path.join(__dirname, 'resources/views'));
