@@ -1,5 +1,4 @@
 class SitesController {
-    
     // [GET] home
     index(req, res) {
         res.render('home');
@@ -7,8 +6,8 @@ class SitesController {
 
     // [GET] search
     search(req, res) {
-        res.render('search')
+        res.render('search');
     }
 }
 
-module.exports = new SitesController;
+module.exports = new SitesController();

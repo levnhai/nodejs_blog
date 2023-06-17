@@ -1,35 +1,40 @@
-const express = require('express')
-const morgan = require('morgan')
-const path = require('node:path')
-const hbs = require('express-handlebars')
-const route = require('./routes')
+const express = require('express');
+const morgan = require('morgan');
+const path = require('node:path');
+const hbs = require('express-handlebars');
+const route = require('./routes');
 
-const app = express()
-const port = 3001
+const app = express();
+const port = 3001;
 
 //HTTP logger
-app.use(morgan('combined'))
+app.use(morgan('combined'));
 
-app.use(express.urlencoded({
-  extended: true
-}))
-app.use(express.json())
+app.use(
+    express.urlencoded({
+        extended: true,
+    }),
+);
+app.use(express.json());
 
 // template engine
-app.set("view engine", 'hbs');
-app.engine('hbs', hbs.engine({
-  extname : '.hbs'
-}));
+app.set('view engine', 'hbs');
+app.engine(
+    'hbs',
+    hbs.engine({
+        extname: '.hbs',
+    }),
+);
 
 //Static Folder
-app.set('views',path.join(__dirname, 'resources/views'))
+app.set('views', path.join(__dirname, 'resources/views'));
 
-// static web 
-app.use(express.static(path.join(__dirname, 'public')))
+// static web
+app.use(express.static(path.join(__dirname, 'public')));
 
 // router init
-route(app)
+route(app);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+    console.log(`Example app listening on port ${port}`);
+});

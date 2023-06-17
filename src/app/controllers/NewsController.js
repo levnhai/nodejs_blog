@@ -1,5 +1,4 @@
 class NewsController {
-    
     // [GET] profile
     index(req, res) {
         res.render('profile');
@@ -7,12 +6,12 @@ class NewsController {
 
     // [GET] profile detail
     show(req, res) {
-        res.send('profile detail')
+        res.send('profile detail');
     }
 
     haike(req, res) {
-        res.send('haikake')
+        res.send('haikake');
     }
 }
 
-module.exports = new NewsController;
+module.exports = new NewsController();
