@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
-  "scripts": { 
+  "scripts": {
     "start": "nodemon --inspect src/index.js",
+    "pre-commit": "lint-staged",
     "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,18 +21,19 @@
   "homepage": "https://github.com/levnhai/nodejs_blog#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "express-handlebars": "^7.0.7"
+    "express-handlebars": "^7.0.7",
+    "mongoose": "^7.3.1"
   },
   "lint-staged": {
     "src/**/*.{js,json,scss}": "prettier --single-quote --tab-width 4 --trailing-comma all --write"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm run pre-commit"
     }
   },
   "devDependencies": {
-    "husky": "^8.0.3",
+    "husky": "^4.2.5",
     "lint-staged": "^13.2.2",
     "morgan": "^1.10.0",
     "node-sass": "^9.0.0",
