@@ -3,8 +3,8 @@ const router = express.Router();
 
 const newsController = require('../app/controllers/NewsController');
 
-router.use('/:laptrinh', newsController.show);
-router.use('/:haike', newsController.haike);
-router.use('/', newsController.index);
+router.get('/:laptrinh', newsController.show);
+router.get('/:haike', newsController.haike);
+router.get('/', newsController.index);
 
 module.exports = router;
