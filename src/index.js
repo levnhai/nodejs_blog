@@ -5,8 +5,6 @@ const hbs = require('express-handlebars');
 const route = require('./routes');
 const db = require('./config/db');
 
-db.connect();
-
 const app = express();
 const port = 3001;
 
@@ -36,8 +34,10 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // router init
-route(app);
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);
 });
+
+db.connect();
+route(app);
