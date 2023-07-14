@@ -1,0 +1,31 @@
+<div class="mt-4">
+    <h2>Danh sách khóa học của tôi</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">description</th>
+                <th scope="col">videoId</th>
+                <th scope="col">lever</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each Course}}
+                <tr>
+                    <th scope="row">{{sumIndex @index 1}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.description}}</td>
+                    <td>{{this.videoId}}</td>
+                    <td>{{this.level}}</td>
+                    <td>
+                         <a href="/courses/{{this._id}}/edit" class="btn btn-outline-dark">edit</a>
+                    </td>
+                    <td>
+                         <a href="" class="btn btn-outline-dark">delete</a>
+                    </td>
+                 </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

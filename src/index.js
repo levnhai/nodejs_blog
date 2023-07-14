@@ -4,6 +4,7 @@ const path = require('node:path');
 const hbs = require('express-handlebars');
 const route = require('./routes');
 const db = require('./config/db');
+const methodOverride = require('method-override');
 
 const app = express();
 const port = 3001;
@@ -24,6 +25,11 @@ app.engine(
     'hbs',
     hbs.engine({
         extname: '.hbs',
+        helpers: {
+            sumIndex: function (a, b) {
+                return a + b;
+            },
+        },
     }),
 );
 
@@ -33,8 +39,10 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 // static web
 app.use(express.static(path.join(__dirname, 'public')));
 
-// router init
+// method override
+app.use(methodOverride('_method'));
 
+// router init
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);
 });
