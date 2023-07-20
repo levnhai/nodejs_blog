@@ -1,9 +1,7 @@
 <div class="mt-4">
     <div class="d-flex">
-      <h2 class="">Danh sách khóa học của tôi</h2>
-      <a href="/me/store/trash" class="ml-auto">
-        <svg class="text-center" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
-      </a>
+      <h2 class="">Danh sách khóa đã xóa</h2>
+      <a style="height: 40px;" href="/me/store/courses" class="btn btn-primary ml-auto" role="button">Danh sách khóa học</a>
     </div>
     <table class="table">
         <thead>
@@ -12,7 +10,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">description</th>
                 <th scope="col">videoId</th>
-                <th scope="col">lever</th>
+                <th scope="col" colspan="3">lever</th>
             </tr>
         </thead>
         <tbody>
@@ -24,19 +22,19 @@
                   <td>{{this.videoId}}</td>
                   <td>{{this.level}}</td>
                   <td>
-                        <a href="/courses/{{this._id}}/edit" class="btn btn-outline-dark">edit</a>
+                        <a class="btn btn-primary btn-restore" role="button" data-id="{{this._id}}">Khôi phục</a>
                   </td>
                   <td>
-                        <a href="" class="btn btn-outline-dark" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#deleteCourseModal"></a>delete</a>
+                        <a href="" class="btn btn-primary" role="button" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#deleteCourseModal"></a>Xóa vỉnh viễn</a>
                   </td>
                 </tr>
             {{else}}
             <tr class="text-center">
               <td colspan="3">
-                Không có danh sách khóa học nào.
+                thùng rác trống
               </td>
                <td colspan="2">
-                <a href="/courses/create" class="btn btn-primary" href="#" role="button">Thêm khóa học</a>
+                <a href="/me/store/courses" class="btn btn-primary" href="#" role="button">Danh sách khóa học</a>
               </td>
             </tr>
             {{/each}}
@@ -64,14 +62,16 @@
   </div>
 </div>
 
-{{!-- form hiden delete courses --}}
 <form name="delete-course-form" method="POST"></form>
+<form name="restore-course-form" method="POST"></form>
 
 <script>
     
     var deleteCourseModal = document.getElementById('deleteCourseModal')
     var btnDeleteCourse = document.getElementById('btn-delete-course')
-    var formDeleteCourse = document.forms['delete-course-form']
+    var deleteCourseForm = document.forms['delete-course-form']
+    var restoreCourseForm = document.forms['restore-course-form']
+    var restoryBtn = $(".btn-restore")
 
     var courseID;
 
@@ -82,9 +82,18 @@
       })
     }
 
+  // delete force
    btnDeleteCourse.onclick = function() {
-      formDeleteCourse.action = '/courses/'+ courseID +'?_method=DELETE';
-      formDeleteCourse.submit();
+      deleteCourseForm.action = '/courses/'+ courseID +'/force?_method=DELETE';
+      deleteCourseForm.submit();
    }
+    console.log(restoreCourseForm)
+
+   //btnRestore
+   restoryBtn.click(function(e) {
+    const courseID =$(this).data('id')
+    restoreCourseForm.action = '/courses/'+ courseID +'/restore?_method=PATCH';
+    restoreCourseForm.submit()
+   })
 
 </script>
