@@ -8,3 +8,11 @@ h1 {
   border-radius: 50%;
   width: 40px;
   margin-right: 8px; }
+
+.count-delete {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  font-size: 14px;
+  color: red;
+  font-weight: 600; }

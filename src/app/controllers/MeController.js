@@ -7,10 +7,11 @@ const {
 class CoursesController {
     // [GET] me/courses/
     storeCourse(req, res, next) {
-        Course.find({})
-            .then((Course) => {
+        Promise.all([Course.find({}), Course.countDocumentsDeleted({})])
+            .then(([course, countDelete]) => {
                 res.render('me/store-courses', {
-                    Course: mutipleMongooseToObject(Course),
+                    countDelete,
+                    course: mutipleMongooseToObject(course),
                 });
             })
             .catch(next);
