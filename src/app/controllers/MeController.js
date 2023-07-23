@@ -7,7 +7,14 @@ const {
 class CoursesController {
     // [GET] me/courses/
     storeCourse(req, res, next) {
-        Promise.all([Course.find({}), Course.countDocumentsWithDeleted({})])
+        var courseQuery = Course.find({});
+
+        if (req.query.hasOwnProperty('_soft')) {
+            courseQuery = courseQuery.sort({
+                [req.query.column]: req.query.type,
+            });
+        }
+        Promise.all([courseQuery, Course.countDocumentsWithDeleted({})])
             .then(([Course, countDelete]) => {
                 res.render('me/store-courses', {
                     countDelete,
